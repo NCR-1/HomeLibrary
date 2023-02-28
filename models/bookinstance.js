@@ -1,18 +1,28 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { DateTime } = require('luxon');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var BookInstanceSchema = new Schema({
-    book: { type: Schema.Types.ObjectId, ref: 'book', required: true },
-    imprint: { type: String, required: true },
-    status: { type: String, required: true, enum: ['Available', 'Maintenance', 'Loaned', 'Reserved'], default: 'Maintenance' },
-    due_back: { type: Date, default: Date.now }
+const BookInstanceSchema = new Schema({
+	book: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
+	imprint: { type: String, required: true },
+	status: {
+		type: String,
+		required: true,
+		enum: ['Available', 'Maintenance', 'Loaned', 'Reserved'],
+		default: 'Maintenance',
+	},
+	due_back: { type: Date, default: Date.now },
 });
 
 // Virtual property creation for bookinstance's URL
 BookInstanceSchema.virtual('url').get(function () {
-    return '/catalog/bookinstance' + this._id;
+	return '/catalogue/bookinstance/' + this._id;
 });
 
-// Export module
+// Virtual property for formatting the date using 'luxon'
+BookInstanceSchema.virtual('due_back_formatted').get(function () {
+	return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
+});
+
 module.exports = mongoose.model('BookInstance', BookInstanceSchema);
