@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -16,6 +18,7 @@ const mongoose = require('mongoose');
 // Setup default mongoose connection
 const mongoDB = process.env.MONGODB_URI;
 
+mongoose.set('strictQuery', true);
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 // Get the default connection
 const db = mongoose.connection;
