@@ -1,8 +1,62 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: bisque;
 }
+
+/* layout.pug start */
 
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  height: 250px;
+
+  background-color: #f1f1f1;
+  outline: 2px solid black;
+  border-radius: 10px;
+}
+
+.sidebar li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.sidebar li a:hover {
+  background-color: green;
+  border-radius: 5px;
+  color: #fff;
+}
+/* layout.pug start */
+
+/* index.pug start */
+.content {
+  margin: auto;
+  width: 40%;
+  padding: 30px;
+  margin-top: 0;
+  background-color: #f1f1f1;
+  outline: 2px solid black;
+  border-radius: 10px;
+
+}
+
+.title {
+  margin-top: 0;
+}
+
+/* index.pug end */
